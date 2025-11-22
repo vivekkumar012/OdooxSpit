@@ -81,10 +81,9 @@ export default function MernDashboard() {
                     setShowSettingsOptions(false);
 
                     // ROUTING FIX → works properly now
-                    if (t === "Dashboard") window.location.href = "/";
                     if (t === "Operations") window.location.href = "/operations";
                     if (t === "Stock") window.location.href = "/stock";
-                    if (t === "Move History") window.location.href = "/move-history";
+                    if (t === "Move History") window.location.href = "/history";
                   }}
                   className={`relative rounded-md px-3 py-1 text-sm font-medium transition-colors ${
                     activeTab === t ? "text-cyan-700" : "text-slate-400 hover:text-cyan-700"

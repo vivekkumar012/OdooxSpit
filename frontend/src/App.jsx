@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import Login from "./pages/login";
 import DashBoard from "./components/DashBoard";
 import StockPage from "./pages/Stock";
+import MoveHistory from "./pages/History";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path="/stock" element={<StockPage />} />
+        <Route path="/history" element={<MoveHistory />} />
       </Routes>
       <Toaster />
     </div>
