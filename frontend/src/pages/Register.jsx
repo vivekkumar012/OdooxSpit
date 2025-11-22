@@ -20,6 +20,13 @@ export default function Register() {
       ...prev,
       [name]: value,
     }));
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
   }
 
   function validateClient() {
@@ -84,21 +91,27 @@ export default function Register() {
         }, 2000);
       }
     } catch (err) {
-      setServerMsg({ type: "error", text: "Network error" });
+      setServerMsg({ 
+        type: "error", 
+        text: "Network error. Please check if the server is running." 
+      });
+      console.error("Registration error:", err);
     } finally {
       setLoading(false);
     }
   }
 
-  const handleKeyPress = (e) => {
+  // Fixed: Use onKeyDown instead of onKeyPress (which is deprecated)
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       handleSubmit();
     }
   };
 
   const inputClass =
     "w-full rounded-lg bg-slate-900/60 px-4 py-3 border border-slate-700 text-white focus:ring-2 focus:ring-" +
-    ACCENT;
+    ACCENT + " focus:border-transparent outline-none transition-all";
 
   return (
     <div className="min-h-screen bg-slate-900 flex items-center justify-center p-6">
@@ -114,11 +127,13 @@ export default function Register() {
             <label className="block text-slate-300 mb-1">Login ID</label>
             <input
               name="loginId"
+              type="text"
               value={form.loginId}
               onChange={handleChange}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               className={inputClass}
               placeholder="Choose a login ID (6-12 characters)"
+              autoComplete="username"
             />
             {errors.loginId && (
               <p className="text-rose-400 text-sm mt-1">{errors.loginId}</p>
@@ -133,9 +148,10 @@ export default function Register() {
               type="email"
               value={form.email}
               onChange={handleChange}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               className={inputClass}
               placeholder="your.email@example.com"
+              autoComplete="email"
             />
             {errors.email && (
               <p className="text-rose-400 text-sm mt-1">{errors.email}</p>
@@ -150,9 +166,10 @@ export default function Register() {
               type="password"
               value={form.password}
               onChange={handleChange}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               className={inputClass}
               placeholder="Create a strong password"
+              autoComplete="new-password"
             />
             {errors.password && (
               <p className="text-rose-400 text-sm mt-1">{errors.password}</p>
@@ -169,9 +186,10 @@ export default function Register() {
               type="password"
               value={form.confirmPassword}
               onChange={handleChange}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               className={inputClass}
               placeholder="Re-enter your password"
+              autoComplete="new-password"
             />
             {errors.confirmPassword && (
               <p className="text-rose-400 text-sm mt-1">
@@ -192,10 +210,10 @@ export default function Register() {
           {/* server message */}
           {serverMsg && (
             <div
-              className={`mt-2 text-sm text-center ${
+              className={`mt-2 p-3 rounded-lg text-sm text-center ${
                 serverMsg.type === "error"
-                  ? "text-rose-400"
-                  : "text-emerald-400"
+                  ? "bg-rose-500/10 text-rose-400 border border-rose-500/20"
+                  : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
               }`}
             >
               {serverMsg.text}
