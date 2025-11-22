@@ -10,6 +10,7 @@ import StockPage from "./pages/Stock";
 
 import Register from "./pages/Register";
 import ReceiptPage from "./pages/ReceiptPage";
+import DeliveryPage from "./pages/DeliveryPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path="/stock" element={<StockPage />} />
         <Route path="/receipt" element={<ReceiptPage />} />
+        <Route path="/delivery" element={<DeliveryPage />} />
       </Routes>
       <Toaster />
     </div>
