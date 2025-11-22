@@ -6,14 +6,12 @@ export const register = async (req, res) => {
     try {
         const {loginId, email, password} = req.body;
         
-        // Check if all fields are provided
         if(!loginId || !email || !password) {
             return res.status(401).json({
                 message: "All Fields are required"
             })
         }
 
-        // Check if email already exists
         const existUser = await userModel.findOne({
             email: email
         })
@@ -23,7 +21,7 @@ export const register = async (req, res) => {
             })
         }
 
-        // Check if loginId already exists
+       
         const existLoginId = await userModel.findOne({
             loginId: loginId
         })
@@ -33,14 +31,11 @@ export const register = async (req, res) => {
             })
         }
 
-        // Hash the password
         const hashPass = await bcrypt.hash(password, 10);
-
-        // Create new user with HASHED password (FIXED HERE!)
         const newUser = await userModel.create({
             loginId: loginId,
             email: email,
-            password: hashPass  // ✅ Changed from 'password' to 'hashPass'
+            password: hashPass 
         })
 
         res.status(200).json({
@@ -63,8 +58,7 @@ export const login = async (req, res) => {
     try {
         const {loginId, password}  = req.body;
         
-        // Fixed validation check
-        if(!loginId || !password) {  // ✅ Changed from comma to ||
+        if(!loginId || !password) {  
             return res.status(401).json({
                 message: "All fields are required",
             })
@@ -79,7 +73,6 @@ export const login = async (req, res) => {
             })
         }
 
-        // Compare password with hashed password
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if(!isPasswordValid) {
             return res.status(403).json({
@@ -87,11 +80,10 @@ export const login = async (req, res) => {
             })
         }
 
-        // Create JWT token with proper payload
         const token = jwt.sign(
-            { loginId: user.loginId, id: user._id },  // ✅ Better token payload
+            { loginId: user.loginId, id: user._id },  
             process.env.JWT_SECRET,
-            { expiresIn: '7d' }  // ✅ Added expiration
+            { expiresIn: '7d' }  
         );
 
         res.status(200).json({

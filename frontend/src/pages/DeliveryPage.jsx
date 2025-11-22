@@ -6,7 +6,7 @@ export default function DeliveryPage() {
   const tabs = ["Dashboard", "Operations", "Stock", "Move History", "Settings"];
   
   const [activeTab, setActiveTab] = useState("Operations");
-  const [viewMode, setViewMode] = useState("list"); // 'list' or 'kanban'
+  const [viewMode, setViewMode] = useState("list"); 
   const [searchTerm, setSearchTerm] = useState("");
   const [showSettingsOptions, setShowSettingsOptions] = useState(false);
   const [selectedDelivery, setSelectedDelivery] = useState(null);
