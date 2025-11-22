@@ -3,7 +3,7 @@ import { Search, List, LayoutGrid, X } from "lucide-react";
 
 export default function DeliveryPage() {
   const ACCENT = "cyan-500";
-  const tabs = ["Dashboard", "Operations", "Products", "Move History", "Settings"];
+  const tabs = ["Dashboard", "Operations", "Stock", "Move History", "Settings"];
   
   const [activeTab, setActiveTab] = useState("Operations");
   const [viewMode, setViewMode] = useState("list"); // 'list' or 'kanban'
@@ -122,8 +122,8 @@ export default function DeliveryPage() {
                     // Navigation routing
                     if (t === "Dashboard") window.location.href = "/dashboard";
                     if (t === "Operations") window.location.href = "/operations";
-                    if (t === "Products") window.location.href = "/products";
-                    if (t === "Move History") window.location.href = "/move-history";
+                    if (t === "Stock") window.location.href = "/stock";
+                    if (t === "Move History") window.location.href = "/history";
                   }}
                   className={`relative rounded-md px-3 py-1 text-sm font-medium transition-colors ${
                     activeTab === t ? "text-cyan-400" : "text-slate-400 hover:text-cyan-400"
