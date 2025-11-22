@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 export default function MernDashboard() {
   const ACCENT = "cyan-500";
@@ -9,6 +11,9 @@ export default function MernDashboard() {
   const [delivery] = useState({ toDeliver: 4, late: 1, waiting: 2, ops: 6 });
   const [showSettingsOptions, setShowSettingsOptions] = useState(false);
   const [pageBgClass, setPageBgClass] = useState("bg-[#0f172a]");
+
+  const navigate = useNavigate();
+
 
   const selectSetting = (option) => {
     if (option === "Warehouse" || option === "Locations") {
@@ -67,6 +72,30 @@ export default function MernDashboard() {
                   </div>
                 );
               }
+
+              return (
+                <button
+                  key={t}
+                  onClick={() => {
+                    setActiveTab(t);
+                    setShowSettingsOptions(false);
+
+                    // ROUTING FIX → works properly now
+                    if (t === "Dashboard") window.location.href = "/";
+                    if (t === "Operations") window.location.href = "/operations";
+                    if (t === "Stock") window.location.href = "/stock";
+                    if (t === "Move History") window.location.href = "/move-history";
+                  }}
+                  className={`relative rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                    activeTab === t ? "text-cyan-700" : "text-slate-400 hover:text-cyan-700"
+                  }`}
+                >
+                  {t}
+                  {activeTab === t && (
+                    <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 inline-block w-10 border-b-2 border-cyan-100" />
+                  )}
+                </button>
+              );
 
               // Default tab rendering
               return (
