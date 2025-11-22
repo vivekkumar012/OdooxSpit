@@ -5,6 +5,7 @@ import Products from "./components/Products";
 import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
 import Login from "./pages/login";
+import DashBoard from "./components/DashBoard";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/dashboard" element={<DashBoard />} />
       </Routes>
       <Toaster />
     </div>
