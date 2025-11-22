@@ -2,9 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import Products from "./components/Products";
-import Register from "./pages/Register";
+
 import { Toaster } from "react-hot-toast";
 import Login from "./pages/login";
+
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -13,7 +15,6 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/products" element={<Products />} />
       </Routes>
       <Toaster />
     </div>
