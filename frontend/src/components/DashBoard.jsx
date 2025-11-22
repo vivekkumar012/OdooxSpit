@@ -156,7 +156,7 @@ export default function MernDashboard() {
               <div className="mt-6 flex items-center gap-4">
                 <div>
                   <button
-                    onClick={() => alert("Navigate to Receipt list (mock)")}
+                    onClick={() => navigate("/receipt")}
                     className="rounded-md border border-[#253045] bg-cyan-900 px-4 py-2 text-sm font-medium shadow-sm hover:bg-[#1e293b]"
                   >
                     {receipt.toReceive} to receive

@@ -49,7 +49,7 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("http://localhost:3001/api/v1/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
